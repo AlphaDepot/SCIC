@@ -6,7 +6,7 @@ This project is a Simple Compound Interest Calculator built using C# and WPF. It
 
 - Calculate compound interest with regular payments.
 - Input fields for principal amount, interest rate, years of growth, compound frequency, payment amount, and payment frequency.
-- Display total payments, payments + principal, total interest, and total value.
+- Display the total invested amount, total interest earned, and final amount after the specified period.
 
 ## License
 
