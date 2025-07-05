@@ -4,138 +4,57 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SCIC"
+        xmlns:uc="clr-namespace:SCIC.UserControls"
         mc:Ignorable="d"
-        Title="SCIC - Simple Compound Interest Calculator" Height="450" Width="820">
+        Title="SCIC - Simple Compound Interest Calculator" Height="500" Width="820">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Column="2" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="0"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <!-- Principal -->
-            <Label Name="PrincipalLabel" Content="Principal Amount:" Grid.Column="0" Grid.Row="0"  VerticalContentAlignment="Center" FontSize="15"/>
-            <TextBox Name="Principal" Grid.Column="1"  Grid.Row="0" VerticalContentAlignment="Center" Height="30" Text="1000" BorderBrush="#ccc" Padding="5 0 5 0"/>
+        <!-- Inputs -->
+        <Border Padding="20" Grid.Column="0">
+            <StackPanel>
+                <!-- Principal -->
+                <uc:LabeledInputControl LabelContent="Principal Amount" TextBoxBinding="{Binding Principal}" />
 
-            <!-- Annual Interest Rate -->
-            <Label Content="Interest Rate:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" FontSize="15"/>
-            <TextBox Name="InterestRateResult" Grid.Column="1"  Grid.Row="1" VerticalContentAlignment="Center" Height="30" Text="10"  BorderBrush="#ccc" Padding="5 0 5 0"/>
+                <!-- Annual Interest Rate -->
+                <uc:LabeledInputControl LabelContent="Interest Rate" TextBoxBinding="{Binding InterestRate}" />
 
-            <!-- Years of Grouth -->
-            <Label Content="Years of Grouth:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" FontSize="15"/>
+                <!-- Years of Grouth -->
+                <uc:LabeledInputControl LabelContent="Years of Growth" TextBoxBinding="{Binding YearsOfGrowth}" />
 
-            <TextBox Name="YearsOfGrouth" Grid.Column="1"  Grid.Row="2" VerticalContentAlignment="Center" Height="30" Text="30" BorderBrush="#ccc" Padding="5 0 5 0"/>
-            
-            <!-- Compound Frequency -->
-            <Label Content="Compound Frequency:" Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Center" FontSize="15"/>
-            <ComboBox Name="CompoundFrequency" Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" Height="30"  BorderBrush="#ccc" BorderThickness="1"  >
-                <ComboBoxItem Tag="1" IsSelected="True" >Anual</ComboBoxItem>
-                <ComboBoxItem Tag="2">Semi-Annual</ComboBoxItem>
-                <ComboBoxItem Tag="4">Quarterly</ComboBoxItem>
-                <ComboBoxItem Tag="6" >Bi-Montly</ComboBoxItem>
-                <ComboBoxItem Tag="12">Montly</ComboBoxItem>
-                <ComboBoxItem Tag="24">Semi-Montly</ComboBoxItem>
-                <ComboBoxItem Tag="26" >Bi-Weekly</ComboBoxItem>
-                <ComboBoxItem Tag="52">Weekly</ComboBoxItem>
-                <ComboBoxItem Tag="365">Daily</ComboBoxItem>
-            </ComboBox>
+                <!-- Compound Frequency -->
+                <uc:LabeledComboBoxControl LabelContent="Compound Frequency"
+                                           ItemsSourceBinding="{Binding FrequencyOptionsList}"
+                                           SelectedItem="{Binding CompoundFrequency}" />
+                
+                <!-- Payment -->
+                <uc:LabeledInputControl LabelContent="Payment" TextBoxBinding="{Binding Payment}" />
 
+                <!-- Payment Frequency -->
+                <uc:LabeledComboBoxControl LabelContent="Payment Frequency"
+                                           ItemsSourceBinding="{Binding FrequencyOptionsList}"
+                                           SelectedItem="{Binding PaymentFrequency}" />
+                <!-- Action -->
+                <StackPanel HorizontalAlignment="Right">
+                    <Button Content="Calculate" Click="Button_Calculate" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
 
-            <!-- Payment -->
-            <Label Content="Payment:" Grid.Column="0" Grid.Row="5" VerticalContentAlignment="Center" FontSize="15"/>
-            <TextBox Name="Payment" Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" Height="30" Text="200"  BorderBrush="#ccc" Padding="5 0 5 0"/>
-
-            <!-- Payment Frequency -->
-            <Label Content="Payment Frequency:" Grid.Column="0" Grid.Row="6" VerticalContentAlignment="Center" FontSize="15"/>
-            <ComboBox Name="PaymentFrequency" Grid.Column="1" Grid.Row="6" VerticalContentAlignment="Center" Height="30"  BorderBrush="#ccc">
-                <ComboBoxItem Tag="1" >Anual</ComboBoxItem>
-                <ComboBoxItem Tag="2">Semi-Annual</ComboBoxItem>
-                <ComboBoxItem Tag="4">Quarterly</ComboBoxItem>
-                <ComboBoxItem Tag="6">Bi-Montly</ComboBoxItem>
-                <ComboBoxItem Tag="12">Montly</ComboBoxItem>
-                <ComboBoxItem Tag="24">Semi-Montly</ComboBoxItem>
-                <ComboBoxItem Tag="26" IsSelected="True">Bi-Weekly</ComboBoxItem>
-                <ComboBoxItem Tag="52">Weekly</ComboBoxItem>
-                <ComboBoxItem Tag="365">Daily</ComboBoxItem>
-            </ComboBox>
-
-            <Button Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"  Content="Calculate" Click="Button_Calculate"/>
-              
-        </Grid>
         <!-- Results -->
-        <StackPanel Grid.Row="1" Grid.Column="1">
-            
-            <!-- Total Payment -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="20" />
-                </Grid.ColumnDefinitions>
-                <Label Name="TotalPaymentsLabel" Content="Total Payments:" VerticalContentAlignment="Center" FontSize="18" Grid.Column="0"/>
-                <Label Name="TotalPaymentsLabel2"    Grid.Column="1"/>
-                <TextBlock Name="TotalPayments" Height="20" TextAlignment="right" Text="0" Padding="0 0 5 0" Margin="0 0 20 0" FontSize="18" Grid.Column="1" FontWeight="Bold"/>
-            </Grid>
+        <Border Padding="10" Grid.Column="1">
+            <StackPanel>
+                <!-- Total Payed -->
+                <uc:LabeledTextBlockControl LabelContent="Total Invested" TextContent="{Binding InvestmentAmount}" />
 
-            <!-- Total Payment -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="20" />
-                </Grid.ColumnDefinitions>
-                <Label Name="PaymentInterestLabel" Content="Payments + Principal:" VerticalContentAlignment="Center" FontSize="18" Grid.Column="0"/>
-                <Label Name="PaymentInterestLabel2"    Grid.Column="1"/>
-                <TextBlock Name="PaymentInterest" Height="20" TextAlignment="right" Text="0" Padding="0 0 5 0" Margin="0 0 20 0" FontSize="18" Grid.Column="1" FontWeight="Bold"/>
-            </Grid>
+                <!-- Future Interest -->
+                <uc:LabeledTextBlockControl LabelContent="Interest Accrued" TextContent="{Binding InterestAccrued}" />
 
-            <!-- Future Interest -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="20" />
-                </Grid.ColumnDefinitions>
-                <Label Name="FutureInterestLabel" Content="Total Interest:" VerticalContentAlignment="Center" FontSize="18" Grid.Column="0"/>
-                <Label Name="FutureInterestLabel2"   Grid.Column="1" />
-                <TextBlock Name="FutureInterest" Height="20" TextAlignment="right" Text="0" Padding="0 0 5 0" Margin="0 0 20 0" FontSize="18" Grid.Column="1" FontWeight="Bold"/>
-            </Grid>
-
-            <!-- Future Total -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="20" />
-                </Grid.ColumnDefinitions>
-                <Label Name="FutureValueLabel" Content="Total Value:"  VerticalContentAlignment="Center" FontSize="18" Grid.Column="0"/>
-                <Label Name="FutureValueLabel2"  Grid.Column="1" />
-                <TextBlock Name="FutureValue" Height="20" TextAlignment="right" Text="0" Padding="0 0 5 0" Margin="0 0 20 0" FontSize="18" Grid.Column="1" FontWeight="Bold"/>
-            </Grid>
-        </StackPanel>
+                <!-- Future Total -->
+                <uc:LabeledTextBlockControl LabelContent="Total" TextContent="{Binding FutureValue}" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
