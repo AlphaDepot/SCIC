@@ -6,55 +6,55 @@
         xmlns:local="clr-namespace:SCIC"
         xmlns:uc="clr-namespace:SCIC.UserControls"
         mc:Ignorable="d"
-        Title="SCIC - Simple Compound Interest Calculator" Height="500" Width="820">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <!-- Inputs -->
-        <Border Padding="20" Grid.Column="0">
-            <StackPanel>
-                <!-- Principal -->
-                <uc:LabeledInputControl LabelContent="Principal Amount" TextBoxBinding="{Binding Principal}" />
+        Title="SCIC - Simple Compound Interest Calculator" Height="500" Width="820" MinWidth="400" MinHeight="300">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <uc:ResponsiveTwoColumnUserControl>
+            <uc:ResponsiveTwoColumnUserControl.ColumnOneContent>
+                <Border Padding="10" >
+                    <StackPanel>
+                        <!-- Principal -->
+                        <uc:LabeledInputControl LabelContent="Principal Amount" TextBoxBinding="{Binding Principal}" />
 
-                <!-- Annual Interest Rate -->
-                <uc:LabeledInputControl LabelContent="Interest Rate" TextBoxBinding="{Binding InterestRate}" />
+                        <!-- Annual Interest Rate -->
+                        <uc:LabeledInputControl LabelContent="Interest Rate" TextBoxBinding="{Binding InterestRate}" />
 
-                <!-- Years of Grouth -->
-                <uc:LabeledInputControl LabelContent="Years of Growth" TextBoxBinding="{Binding YearsOfGrowth}" />
+                        <!-- Years of Grouth -->
+                        <uc:LabeledInputControl LabelContent="Years of Growth" TextBoxBinding="{Binding YearsOfGrowth}" />
 
-                <!-- Compound Frequency -->
-                <uc:LabeledComboBoxControl LabelContent="Compound Frequency"
-                                           ItemsSourceBinding="{Binding FrequencyOptionsList}"
-                                           SelectedItem="{Binding CompoundFrequency}" />
+                        <!-- Compound Frequency -->
+                        <uc:LabeledComboBoxControl LabelContent="Compound Frequency"
+                                                   ItemsSourceBinding="{Binding FrequencyOptionsList}"
+                                                   SelectedItem="{Binding CompoundFrequency}" />
                 
-                <!-- Payment -->
-                <uc:LabeledInputControl LabelContent="Payment" TextBoxBinding="{Binding Payment}" />
+                        <!-- Payment -->
+                        <uc:LabeledInputControl LabelContent="Payment" TextBoxBinding="{Binding Payment}" />
 
-                <!-- Payment Frequency -->
-                <uc:LabeledComboBoxControl LabelContent="Payment Frequency"
-                                           ItemsSourceBinding="{Binding FrequencyOptionsList}"
-                                           SelectedItem="{Binding PaymentFrequency}" />
-                <!-- Action -->
-                <StackPanel HorizontalAlignment="Right">
-                    <Button Content="Calculate" Click="Button_Calculate" />
-                </StackPanel>
-            </StackPanel>
-        </Border>
+                        <!-- Payment Frequency -->
+                        <uc:LabeledComboBoxControl LabelContent="Payment Frequency"
+                                                   ItemsSourceBinding="{Binding FrequencyOptionsList}"
+                                                   SelectedItem="{Binding PaymentFrequency}" />
+                        <!-- Action -->
+                        <StackPanel HorizontalAlignment="Right">
+                            <Button Content="Calculate" Click="Button_Calculate" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </uc:ResponsiveTwoColumnUserControl.ColumnOneContent>
+            <uc:ResponsiveTwoColumnUserControl.ColumnTwoContent>
+                <!-- Results -->
+                <Border Padding="10" >
+                    <StackPanel>
+                        <!-- Total Payed -->
+                        <uc:LabeledTextBlockControl LabelContent="Total Invested" TextContent="{Binding InvestmentAmount}" />
 
-        <!-- Results -->
-        <Border Padding="10" Grid.Column="1">
-            <StackPanel>
-                <!-- Total Payed -->
-                <uc:LabeledTextBlockControl LabelContent="Total Invested" TextContent="{Binding InvestmentAmount}" />
+                        <!-- Future Interest -->
+                        <uc:LabeledTextBlockControl LabelContent="Interest Accrued" TextContent="{Binding InterestAccrued}" />
 
-                <!-- Future Interest -->
-                <uc:LabeledTextBlockControl LabelContent="Interest Accrued" TextContent="{Binding InterestAccrued}" />
-
-                <!-- Future Total -->
-                <uc:LabeledTextBlockControl LabelContent="Total" TextContent="{Binding FutureValue}" />
-            </StackPanel>
-        </Border>
-    </Grid>
+                        <!-- Future Total -->
+                        <uc:LabeledTextBlockControl LabelContent="Total" TextContent="{Binding FutureValue}" />
+                    </StackPanel>
+                </Border>
+            </uc:ResponsiveTwoColumnUserControl.ColumnTwoContent>
+        </uc:ResponsiveTwoColumnUserControl>
+        </ScrollViewer>
 </Window>
